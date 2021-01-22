@@ -51,9 +51,11 @@ function renderTodo(todo) {
 
   todoList.append(li);
 
-  if (todos.length === 1) {
+  if (todos.length === 1 && todo.isCompleted === false) {
     todoCounter.textContent = `${todos.length} item left`
-  } else if (todos.length > 1) {
+  } else if (!todos.length) {
+    todoCounter.textContent = `0 items left`
+  } else if (todos.length > 1 && todo.isCompleted === false) {
     todoCounter.textContent = `${todos.length} items left`
   }
   
