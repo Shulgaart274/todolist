@@ -5,7 +5,7 @@ const todoList = document.querySelector(".todo__list");
 const todoItem = document.querySelectorAll(".todo__item");
 const todoCheckbox = document.querySelectorAll(".todo__item-checkbox");
 const deleteBtn = document.querySelectorAll(".destroy");
-const todoCounter = document.querySelectorAll(".todo__filter-counter");
+const todoCounter = document.querySelector(".todo__filter-counter");
 const filterAll = document.querySelectorAll(".todo__filter-all");
 const filterActive = document.querySelectorAll(".todo__filter-active");
 const filterCompleted = document.querySelectorAll(".todo__filter-completed");
@@ -50,7 +50,16 @@ function renderTodo(todo) {
 
 
   todoList.append(li);
+
+  if (todos.length === 1) {
+    todoCounter.textContent = `${todos.length} item left`
+  } else if (todos.length > 1) {
+    todoCounter.textContent = `${todos.length} items left`
+  }
+  
 };
+
+
 
 
 
