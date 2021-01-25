@@ -1,6 +1,7 @@
 const form = document.querySelector("#form");
 const typeInput = document.querySelector(".input");
 const toggleAll = document.querySelector(".toggle__all");
+const toggleAllcheckbox = document.querySelector(".toggle__all-checkbox")
 const todoList = document.querySelector(".todo__list");
 const todoItem = document.querySelector(".todo__item");
 
@@ -37,6 +38,10 @@ function addTodo(item) {
 function renderTodos(todos) {
   todoList.innerHTML = "";
 
+  const todosCompleted = todos.filter( item => {
+    return item.completed === false
+  })
+
   todos.forEach((todo) => {
     const checked = todo.completed ? "checked" : null;
 
@@ -56,10 +61,12 @@ function renderTodos(todos) {
       li.style.color = "#d9d9d9";
     }
 
-    if (todos.length === 1 && todo.completed === false) {
-      todoCounter.textContent = `${todos.length} item left`;
-    } else if (todos.length > 1 && todo.completed === false) {
-      todoCounter.textContent = `${todos.length} items left`;
+    if (todosCompleted.length === 1) {
+      todoCounter.textContent = `${todosCompleted.length} item left`;
+    } else if (todosCompleted.length > 1) {
+      todoCounter.textContent = `${todosCompleted.length} items left`;
+    }  else {
+      todoCounter.textContent = `0 items left`
     }
 
     todoList.append(li);
@@ -69,14 +76,19 @@ function renderTodos(todos) {
 function addToLocalStorage(todos) {
   localStorage.setItem("todos", JSON.stringify(todos));
 
+  const filtered = todos.filter( item => {
+    return item.completed === true
+  })
+
   if (todos.length > 0) {
     filterSection.classList.remove("hidden");
     toggleAll.classList.remove("hidden");
   } else {
     toggleAll.classList.add("hidden");
     filterSection.classList.add("hidden");
-    todoCounter.textContent = "0 items left";
   }
+
+  filtered.length > 0 ? completedDelete.classList.remove("hidden") : completedDelete.classList.add("hidden")
 
   renderTodos(todos);
 }
@@ -119,9 +131,19 @@ todoList.addEventListener("click", function (event) {
 });
 
 toggleAll.addEventListener("change", () => {
+
+  if (toggleAllcheckbox.checked) {
   todos.forEach((todo) => {
-   todo.completed === false ? todo.completed = true : todo.completed = false;
-  });
+    todo.completed = true
+  }); }
+  else {
+    todos.forEach((todo) => {
+      todo.completed = false
+    })
+  }
+
+  
+
   addToLocalStorage(todos);
 });
 
@@ -147,7 +169,9 @@ filterCompleted.addEventListener("click", () => {
 
 completedDelete.addEventListener("click", () => {
   todos.forEach((todo) => {
-    deleteTodo(todo.id);
+    if (todo.completed === true) {
+      deleteTodo(todo.id);
+    }
   });
 });
 
