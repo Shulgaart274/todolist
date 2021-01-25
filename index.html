@@ -10,13 +10,16 @@
     <main>
       <div class="container">
         <h1 class="title">todos</h1>
-        <form class="form" id="form"></form>
-        <input
-          type="text"
-          class="input"
-          form="form"
-          placeholder="What needs to be done?"
-        />
+        <form class="form" id="form">
+          <input
+            type="text"
+            class="input"
+            form="form"
+            placeholder="What needs to be done?"
+            required
+          />
+        </form>
+
         <section class="todo__main">
           <label class="toggle__all">
             <input type="checkbox" class="toggle__all-checkbox" />
@@ -51,20 +54,22 @@
         </section>
         <section class="todo__filter">
           <div class="todo__filter-container">
-            <span class="todo__filter-counter">0 items left</span>
+            <span class="todo__filter-counter"></span>
             <ul class="todo__filter-list">
-              <li class="todo__filter-item todo__filter-all">
-                <a href="#!">All</a>
+              <li class="todo__filter-item">
+                <button class="todo__filter-all">All</button>
               </li>
-              <li class="todo__filter-item todo__filter-active">
-                <a href="#!">Active</a>
+              <li class="todo__filter-item">
+                <button class="todo__filter-active">Active</button>
               </li>
-              <li class="todo__filter-item todo__filter-completed">
-                <a href="#!">Completed</a>
+              <li class="todo__filter-item">
+                <button class="todo__filter-completed">Completed</button>
               </li>
             </ul>
             <span class="todo__filter-clear"
-              ><a href="#!">Clear completed</a></span
+              ><button class="todo__filter-clearall">
+                Clear completed
+              </button></span
             >
           </div>
         </section>

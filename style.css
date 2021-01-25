@@ -153,7 +153,6 @@ body {
 }
 
 .todo__main {
-  /* box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%); */
   position: relative;
   z-index: 2;
   border-top: 1px solid #e6e6e6;
@@ -165,7 +164,6 @@ body {
   color: #4d4d4d;
   padding: 16px 16px 16px 60px;
   border: none;
-  /* box-shadow: 0px 7px 11px 3px #ccc; */
   width: 100%;
   font-size: 24px;
   font-family: inherit;
@@ -195,7 +193,6 @@ body {
   background-color: #fff;
   padding: 16px 16px 16px 10px;
   border: none;
-  /* box-shadow: 0px 7px 11px 3px #ccc; */
   width: 100%;
   font-size: 24px;
   font-family: inherit;
@@ -210,7 +207,7 @@ body {
   color: #4d4d4d;
   background-color: #fff;
   border: none;
-  /* box-shadow: 0px 7px 11px 3px #ccc; */
+
   width: 100%;
   font-size: 14px;
   border-bottom: 0.2px solid #ddd;
@@ -223,7 +220,7 @@ body {
 }
 
 .todo__filter-counter {
-  width: 35%;
+  width: 30%;
 }
 
 .todo__filter-item {
@@ -244,12 +241,17 @@ body {
   appearance: none;
 }
 
+.toggle__all-checkbox:checked + .toggle__all-span {
+  filter: brightness(1);
+}
+
 .toggle__all-span {
   border: solid #ccc;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 6px;
   transform: rotate(45deg);
+  filter: brightness(0.5);
 }
 
 .todo__item-checkbox {
@@ -265,7 +267,7 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
-/* Hide the browser's default checkbox */
+
 .todo__item-checkbox input {
   position: absolute;
   opacity: 0;
@@ -274,7 +276,6 @@ body {
   width: 0;
 }
 
-/* Create a custom checkbox */
 .checkmark {
   position: absolute;
   top: 0;
@@ -286,29 +287,24 @@ body {
   border-radius: 15px;
 }
 
-/* On mouse-over, add a grey background color */
 .todo__item-checkbox:hover input ~ .checkmark {
   background-color: #fff;
 }
 
-/* When the checkbox is checked, add a blue background */
 .todo__item-checkbox input:checked ~ .checkmark {
   background-color: #fff;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-/* Show the checkmark when checked */
 .todo__item-checkbox input:checked ~ .checkmark:after {
   display: block;
 }
 
-/* Style the checkmark/indicator */
 .todo__item-checkbox .checkmark:after {
   left: 9px;
   top: 3px;
@@ -359,29 +355,46 @@ a {
   padding: 5px;
 }
 
-.todo__filter-item {
-  padding: 5px;
-}
-
-.todo__filter-item:active,
-.todo__filter-item:focus {
-  border: 1px solid #cc9a9a;
-  border-radius: 2px;
-  padding: 4px;
-}
-
-.todo__filter-item:hover {
+.todo__filter-all:hover,
+.todo__filter-active:hover,
+.todo__filter-completed:hover {
   border: 1px solid rgba(204, 154, 154, 0.6);
   border-radius: 2px;
   padding: 4px;
 }
 
 .todo__filter-clear {
-  display: block;
-  margin-left: 5%;
-  padding: 5px;
+  margin-left: 8%;
 }
 
-.todo__filter-clear:hover {
+.todo__filter-clearall:hover {
   text-decoration: underline;
+}
+
+.todo__filter-all,
+.todo__filter-active,
+.todo__filter-completed,
+.todo__filter-clearall {
+  outline: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.todo__filter-all:active,
+.todo__filter-all:focus,
+.todo__filter-active:active,
+.todo__filter-active:focus,
+.todo__filter-completed:active,
+.todo__filter-completed:focus {
+  border: 1px solid #cc9a9a;
+  border-radius: 2px;
+  padding: 4px;
+}
+
+.hidden {
+  display: none;
 }
