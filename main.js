@@ -1,7 +1,11 @@
 const form = document.querySelector("#form");
 const typeInput = document.querySelector(".input");
+
 const toggleAll = document.querySelector(".toggle__all");
 const toggleAllcheckbox = document.querySelector(".toggle__all-checkbox")
+const toggleAllspan = document.querySelector(".toggle__all-span")
+const toggleAllchecked = document.querySelector(".toggle__all-checked");
+
 const todoList = document.querySelector(".todo__list");
 const todoItem = document.querySelector(".todo__item");
 
@@ -12,6 +16,8 @@ const filterAll = document.querySelector(".todo__filter-all");
 const filterActive = document.querySelector(".todo__filter-active");
 const filterCompleted = document.querySelector(".todo__filter-completed");
 const completedDelete = document.querySelector(".todo__filter-clearall");
+
+
 
 let todos = [];
 
@@ -75,6 +81,7 @@ function renderTodos(todos) {
 
 function addToLocalStorage(todos) {
   localStorage.setItem("todos", JSON.stringify(todos));
+  
 
   const filtered = todos.filter( item => {
     return item.completed === true
@@ -90,6 +97,17 @@ function addToLocalStorage(todos) {
 
   filtered.length > 0 ? completedDelete.classList.remove("hidden") : completedDelete.classList.add("hidden")
 
+  if (todos.some(todo => {
+   return todo.completed === false
+  })) {
+      toggleAllcheckbox.checked = false
+      toggleAllspan.classList.remove('toggle__all-checked')
+   
+   } else {
+     toggleAllcheckbox.checked = true
+     toggleAllspan.classList.add('toggle__all-checked')
+   }
+  
   renderTodos(todos);
 }
 
@@ -130,20 +148,25 @@ todoList.addEventListener("click", function (event) {
   }
 });
 
+
+
 toggleAll.addEventListener("change", () => {
+  // debugger;
+// const asd = todos.find(todo => todo.completed === true)
+// console.log(asd)
 
-  if (toggleAllcheckbox.checked) {
-  todos.forEach((todo) => {
-    todo.completed = true
-  }); }
-  else {
+
+
+  if (toggleAllspan.classList.contains("toggle__all-checked")) {
     todos.forEach((todo) => {
-      todo.completed = false
-    })
-  }
-
-  
-
+     todo.completed = false
+    }); }
+    else {
+      todos.forEach((todo) => {
+      todo.completed = true
+      })
+    }
+   
   addToLocalStorage(todos);
 });
 

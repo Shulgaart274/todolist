@@ -235,15 +235,16 @@ body {
   position: absolute;
   top: -45px;
   left: 5px;
+  cursor: pointer;
 }
 
 .toggle__all-checkbox {
   appearance: none;
 }
 
-.toggle__all-checkbox:checked + .toggle__all-span {
+/* .toggle__all-checkbox:checked + .toggle__all-span {
   filter: brightness(1);
-}
+} */
 
 .toggle__all-span {
   border: solid #ccc;
@@ -252,6 +253,10 @@ body {
   padding: 6px;
   transform: rotate(45deg);
   filter: brightness(0.5);
+}
+
+.toggle__all-checked {
+  filter: brightness(1);
 }
 
 .todo__item-checkbox {
